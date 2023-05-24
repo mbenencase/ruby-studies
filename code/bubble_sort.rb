@@ -1,3 +1,6 @@
+require 'benchmark'
+require './utils.rb'
+
 def bubble_sort(array, reversed=false)
   count = 0
   non_iterations = 0
@@ -33,7 +36,10 @@ def bubble_sort(array, reversed=false)
 end
 
 
-array = [3, 4, 6, 0, 1, -2, 3, 5]
+array = generate_random_array(1000, 1, 100)
 
-print array, "\n"
-print bubble_sort(array, true), "\n"
+time = Benchmark.measure do
+  sorted_array = bubble_sort(array)
+end
+
+puts "Time elapsed: #{'%.2f' % (time.real * 1000.0)} [ms]."
